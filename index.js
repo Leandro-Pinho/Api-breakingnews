@@ -6,7 +6,7 @@ const app = express();
 const port = 8080
 
 app.use(express.json());
-app.use('/', useRoute);
+app.use('/user', useRoute);
 
 
 app.listen(port, () => console.log(`App listening on port: http://localhost:${port}`));

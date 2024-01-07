@@ -1,9 +1,9 @@
 import Router from 'express'
-import { soma } from '../controllers/user.controller.js';
+import { create } from '../controllers/user.controller.js';
 
 const route = Router();
 
-route.get("/soma", soma)
+route.post("/", create)
 
 
 export default route;
