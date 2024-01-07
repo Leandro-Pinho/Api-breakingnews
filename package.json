@@ -1,0 +1,13 @@
+{
+  "name": "api-breakingnews",
+  "version": "1.0.0",
+  "description": "API for SPA Breaking News",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "Leandro",
+  "license": "ISC"
+}
