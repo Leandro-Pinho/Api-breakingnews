@@ -1,8 +1,10 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from "cors";
-import useRoute from './src/routes/user.route.js';
+
 import connectDatabase from './src/database/db.js';
+import useRoute from './src/routes/user.route.js';
+import authRoute from './src/routes/auth.route.js';
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -11,7 +13,9 @@ dotenv.config();
 
 app.use(cors());
 app.use(express.json());
+
 app.use('/user', useRoute);
+app.use('/auth', authRoute)
 
 // para mostrar no navegador
 app.get("/", (req, res) => res.send("Hello From Express"));
