@@ -20,15 +20,15 @@ const NewsSchema = mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
-        required: true
+        required: true,
     },
     likes: {
         type: Array,
-        require: true
+        require: true,
     },
     comments: {
         type: Array,
-        require: true
+        require: true,
     },
 
 });
