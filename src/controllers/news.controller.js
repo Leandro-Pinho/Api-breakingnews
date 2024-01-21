@@ -1,4 +1,4 @@
-import { countNews, createService, findAllService } from "../service/news.service.js";
+import { countNews, createService, findAllService, topNewsService } from "../service/news.service.js";
 
 export const create = async (req, res) => {
     try {
@@ -74,4 +74,30 @@ export const findAll = async (req, res) => {
             userAvatar: item.user.avatar,
         }))
     })
+}
+
+export const topNews = async (req, res) => {
+    try {
+        const news = await topNewsService();
+
+        if (!news) {
+            return res.status(400).json({ message: "Não há registro postado!" })
+        }
+
+        res.json({
+            news: {
+                id: news._id,
+                title: news.title,
+                text: news.text,
+                banner: news.banner,
+                likes: news.likes,
+                comments: news.comments,
+                name: news.user.name,
+                username: news.user.username,
+                userAvatar: news.user.avatar,
+            }
+        })
+    } catch (error) {
+        return res.status(401).json({ message: "Não hã registro!" })
+    }
 }
