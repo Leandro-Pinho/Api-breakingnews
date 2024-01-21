@@ -1,4 +1,4 @@
-import { countNews, createService, findAllService, topNewsService } from "../service/news.service.js";
+import { countNews, createService, findAllService, findByIdService, topNewsService } from "../service/news.service.js";
 
 export const create = async (req, res) => {
     try {
@@ -99,5 +99,30 @@ export const topNews = async (req, res) => {
         })
     } catch (error) {
         return res.status(401).json({ message: "Não hã registro!" })
+    }
+}
+
+export const findById = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const news = await findByIdService(id);
+
+        return res.json({
+            news: {
+                id: news._id,
+                title: news.title,
+                text: news.text,
+                banner: news.banner,
+                likes: news.likes,
+                comments: news.comments,
+                name: news.user.name,
+                username: news.user.username,
+                userAvatar: news.user.avatar,
+            }
+        })
+
+    } catch (error) {
+        return res.stauts(401).json({ message: error })
     }
 }
