@@ -33,11 +33,27 @@ export const eraseService = (id) => News.findOneAndDelete({ _id: id });
 export const likeNewsService = (id, userId) => News.findOneAndUpdate(
     { _id: id, "likes.userId": { $nin: [userId] } },
     { $push: { likes: { userId, created: new Date() } } }
-)
+).sort({ _id: -1 });
 
+// para tirar o like da noticia
 export const deleteLikeNewsService = (id, userId) => News.findOneAndUpdate(
     { _id: id },
     { $pull: { likes: { userId } } }
+);
+
+export const addCommentService = (id, comment, userId) => {
+    const idComment = Math.floor(Date.now() * Math.random()).toString(36);
+
+    return News.findOneAndUpdate(
+        { _id: id },
+        { $push: { comments: { idComment, userId, comment, createAt: new Date() }, }, }
+    )
+}
+
+export const deleteCommentService = (id, idComment, userId) => News.findOneAndUpdate(
+    { _id: id },
+    { $pull: { comments: { idComment, userId, }, }, }
 )
+
 
 

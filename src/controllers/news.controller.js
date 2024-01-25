@@ -1,4 +1,18 @@
-import { countNews, createService, findAllService, findByIdService, topNewsService, searchByTitleService, byUserService, updateService, eraseService, likeNewsService, deleteLikeNewsService } from "../service/news.service.js";
+import {
+    countNews,
+    createService,
+    findAllService,
+    findByIdService,
+    topNewsService,
+    searchByTitleService,
+    byUserService,
+    updateService,
+    eraseService,
+    likeNewsService,
+    deleteLikeNewsService,
+    addCommentService,
+    deleteCommentService
+} from "../service/news.service.js";
 
 export const create = async (req, res) => {
     try {
@@ -221,7 +235,6 @@ export const erase = async (req, res) => {
     }
 };
 
-
 export const likeNews = async (req, res) => {
     try {
         const { id } = req.params;
@@ -237,5 +250,48 @@ export const likeNews = async (req, res) => {
         res.status(200).json({ message: "Like done successfully!" });
     } catch (error) {
         res.status(500).json({ message: error })
+    }
+};
+
+export const addComment = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const userId = req.userId;
+        const { comment } = req.body;
+
+        if (!comment) {
+            return res.status(400).json({ message: "write a message to comment" });
+        }
+
+        await addCommentService(id, comment, userId);
+
+        res.json({ message: "Comment successfully completed" });
+
+    } catch (error) {
+        res.status(500).json({ message: error });
+    }
+};
+
+export const deleteComment = async (req, res) => {
+    try {
+        const { id, idComment } = req.params;
+        const userId = req.userId;
+
+        const commentDeleted = await deleteCommentService(id, idComment, userId);
+
+        const commentFinder = commentDeleted.comments.find((comment) => comment.idComment === idComment);
+
+        if (!commentFinder) {
+            return res.status(400).json({ message: "Comment don't exists" });
+        }
+
+        if (commentFinder.userId !== userId) {
+            return res.status(400).json({ message: "You can't delete this comment" });
+        }
+
+        res.json({ message: "Comment successfully removed" });
+
+    } catch (error) {
+        res.status(500).json({ message: error });
     }
 };

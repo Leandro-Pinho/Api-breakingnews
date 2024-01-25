@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { authMiddleware } from "../middlewares/auth.middlewares.js";
-import { findAll, create, topNews, findById, searchByTitle, byUser, update, erase, likeNews } from "../controllers/news.controller.js";
+import { findAll, create, topNews, findById, searchByTitle, byUser, update, erase, likeNews, addComment, deleteComment } from "../controllers/news.controller.js";
 
 const route = Router();
 
@@ -13,5 +13,7 @@ route.get("/:id", authMiddleware, findById);
 route.patch("/:id", authMiddleware, update);
 route.delete("/:id", authMiddleware, erase);
 route.patch("/like/:id", authMiddleware, likeNews);
+route.patch("/comment/:id", authMiddleware, addComment);
+route.patch("/comment/:id/:idComment", authMiddleware, deleteComment);
 
 export default route;
