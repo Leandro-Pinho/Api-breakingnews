@@ -24,4 +24,7 @@ export const searchByTitleService = (title) => News.find({
 export const byUserService = (id) => News.find({ user: id }).sort({ _id: -1 }).populate('user');
 
 // para atualizar a noticia do usuario
-export const updateService = (id, title, text, banner) => News.findOneAndUpdate({ _id: id }, { title, text, banner }, { rawResult: true })
+export const updateService = (id, title, text, banner) => News.findOneAndUpdate({ _id: id }, { title, text, banner }, { rawResult: true });
+
+// para deletar cada noticia
+export const eraseService = (id) => News.findOneAndDelete({ _id: id });
