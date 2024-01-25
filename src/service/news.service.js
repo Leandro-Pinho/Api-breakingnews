@@ -20,4 +20,8 @@ export const searchByTitleService = (title) => News.find({
     title: { $regex: `${title || ""}`, $options: "i" }
 }).sort({ _id: -1 }).populate('user');
 
+// para buscar cada news do usuario
 export const byUserService = (id) => News.find({ user: id }).sort({ _id: -1 }).populate('user');
+
+// para atualizar a noticia do usuario
+export const updateService = (id, title, text, banner) => News.findOneAndUpdate({ _id: id }, { title, text, banner }, { rawResult: true })
