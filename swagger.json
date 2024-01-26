@@ -1,0 +1,133 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Breaking News API Documentation",
+        "description": "In this documentation you will be able to consult the API end-points and also test all available routes. Do not forget to register and carry out the authorization.",
+        "contact": {
+            "email": "leandroessencia@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8080",
+            "description": "Local Server"
+        }
+    ],
+    "paths": {
+        "/user/": {
+            "post": {
+                "summary": "Create a new user",
+                "description": "Route responsible for creating a new user",
+                "tags": [
+                    "Users"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            },
+                            "examples": {
+                                "Users": {
+                                    "value": {
+                                        "name": "Leandro Pinho",
+                                        "username": "L.Pinho",
+                                        "email": "leandro@gmail.com",
+                                        "password": "123",
+                                        "avatar": "https://avatars.githubusercontent.com/u/77171351?v=4",
+                                        "background": "https://images.unsplash.com/photo-1458349726531-234ad56ba80f?q=80&w=1181&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Not Found"
+                    },
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user": {},
+        "/user/{id}": {},
+        "/user/{id}/": {},
+        "/auth/": {},
+        "/news": {},
+        "/news/top": {},
+        "/news/search": {},
+        "/news/byUser": {},
+        "/news/{id}/": {},
+        "/news/{id}": {},
+        "/news/{id}/": {},
+        "/news/like/{id}/": {},
+        "/news/comment/{id}/": {},
+        "/news/comment/{id}/{idComment": {}
+    },
+    "components": {
+        "User": {
+            "name": {
+                "type": "String"
+            },
+            "username": {
+                "type": "String"
+            },
+            "email": {
+                "type": "String"
+            },
+            "password": {
+                "type": "String"
+            },
+            "avatar": {
+                "type": "String"
+            },
+            "background": {
+                "type": "String"
+            }
+        },
+        "News": {
+            "title": {
+                "type": "String"
+            },
+            "text": {
+                "type": "String"
+            },
+            "banner": {
+                "type": "String"
+            },
+            "createAt": {
+                "type": "Date"
+            },
+            "user": {
+                "type": "mongoose.Schema.Types.ObjectId",
+                "ref": "User"
+            },
+            "likes": {
+                "type": "Array"
+            },
+            "comments": {
+                "type": "Array"
+            }
+        },
+        "Comment": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "String"
+                }
+            }
+        }
+    }
+}

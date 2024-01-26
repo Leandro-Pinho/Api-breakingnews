@@ -14,6 +14,7 @@ import {
     deleteCommentService
 } from "../service/news.service.js";
 
+// criar noticia
 export const create = async (req, res) => {
     try {
         const { title, text, banner } = req.body;
@@ -38,6 +39,7 @@ export const create = async (req, res) => {
     }
 };
 
+// trazer todas as noticias
 export const findAll = async (req, res) => {
 
     // para fazer paginação
@@ -90,6 +92,7 @@ export const findAll = async (req, res) => {
     })
 };
 
+// trazer a ultima noticia
 export const topNews = async (req, res) => {
     try {
         const news = await topNewsService();
@@ -116,6 +119,7 @@ export const topNews = async (req, res) => {
     }
 };
 
+// encontrar a noticia pelo id
 export const findById = async (req, res) => {
     try {
         const { id } = req.params;
@@ -141,6 +145,7 @@ export const findById = async (req, res) => {
     }
 };
 
+// pesquisar a noticia pelo titulo
 export const searchByTitle = async (req, res) => {
     try {
         const { title } = req.query;
@@ -170,6 +175,7 @@ export const searchByTitle = async (req, res) => {
     }
 };
 
+// encotrar o usuario
 export const byUser = async (req, res) => {
     try {
         const id = req.userId;
@@ -194,6 +200,7 @@ export const byUser = async (req, res) => {
     }
 };
 
+// atualizar a noticia
 export const update = async (req, res) => {
     try {
         const { title, text, banner } = req.body;
@@ -217,6 +224,7 @@ export const update = async (req, res) => {
     }
 };
 
+// apagar a noticia
 export const erase = async (req, res) => {
     try {
         const { id } = req.params;
@@ -235,6 +243,7 @@ export const erase = async (req, res) => {
     }
 };
 
+// dar like na noticia
 export const likeNews = async (req, res) => {
     try {
         const { id } = req.params;
@@ -253,6 +262,7 @@ export const likeNews = async (req, res) => {
     }
 };
 
+// adicionar um comentario na noticia
 export const addComment = async (req, res) => {
     try {
         const { id } = req.params;
@@ -272,6 +282,7 @@ export const addComment = async (req, res) => {
     }
 };
 
+// tirar um comentario da noticia
 export const deleteComment = async (req, res) => {
     try {
         const { id, idComment } = req.params;

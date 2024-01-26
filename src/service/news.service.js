@@ -41,19 +41,21 @@ export const deleteLikeNewsService = (id, userId) => News.findOneAndUpdate(
     { $pull: { likes: { userId } } }
 );
 
+// para adicionar comentario da noticia
 export const addCommentService = (id, comment, userId) => {
     const idComment = Math.floor(Date.now() * Math.random()).toString(36);
 
     return News.findOneAndUpdate(
         { _id: id },
         { $push: { comments: { idComment, userId, comment, createAt: new Date() }, }, }
-    )
-}
+    ).sort({ _id: -1 });
+};
 
+// para deletar comentario da noticia
 export const deleteCommentService = (id, idComment, userId) => News.findOneAndUpdate(
     { _id: id },
     { $pull: { comments: { idComment, userId, }, }, }
-)
+);
 
 
 
