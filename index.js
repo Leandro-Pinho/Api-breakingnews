@@ -20,7 +20,7 @@ app.use(express.json());
 app.use('/user', useRoute);
 app.use('/auth', authRoute);
 app.use('/news', newsRoute);
-app.use('/docc', swaggerRoute);
+app.use('/doc', swaggerRoute);
 
 // para mostrar no navegador
 app.get("/", (req, res) => res.send("Hello From Express"));

@@ -3,7 +3,7 @@ import { login } from "../controllers/auth.controller.js";
 
 const route = Router();
 
-route.post("/", login);
+route.post("/login", login);
 
 
 export default route;
